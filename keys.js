@@ -7,4 +7,12 @@ var twitterKeys = {
     access_token_secret: 'h4vhid8nAE3gdXNQgZZ3m0vYsgj6wtQ95odhOqe0815mS'
 }
 
-module.exports = twitterKeys;
+var spotifyKeys = {
+    id: '3138ac1c699e4f0f955b047b9ebd676a',
+    secret: "781daa43caf34398a98635f682a75aa9"
+}
+
+module.exports = {
+    twitterKeys: twitterKeys,
+    spotifyKeys: spotifyKeys
+}
