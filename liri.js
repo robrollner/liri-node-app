@@ -53,8 +53,8 @@ function nodeApp() {
 }
 
 function tweeter() {
-    let client = new twitter(API_Keys.twitterKeys);
-    let queryUrl = "https://api.twitter.com/1.1/search/tweets.json?q=mcroblestein&result_type=recent&count=20";
+    let client = new twitter(keys.twitterKeys);
+    let queryUrl = "https://api.twitter.com/1.1/search/tweets.json?q=satincoffins&result_type=recent&count=20";
 
     client.get(queryUrl, (error, tweets, response) => {
 
@@ -64,8 +64,31 @@ function tweeter() {
 
         console.log("\nHere's what I've had to say! ");
         for (var i = 0; i < tweets.statuses.length; i++) {
-            console.log(tweets[i]);
+            console.log(tweets.statuses[i]);
         }
-
+        console.log('');
     })
+}
+
+function songInfo(song) {
+    let Spotify = new spotify(keys.spotifyKeys);
+
+    Spotify.search({
+            type: 'track',
+            query: song,
+            limit: 1
+        },
+        (err, data) => {
+            if (err) {
+                return console.log(err);
+            }
+            let artistName = data.tracks.items[0].album.artists[0].name;
+            let songName = data.tracks.items[0].name;
+            let songURL = data.tracks.items[0].album.artists[0].external_urls.spotify;
+            let albumName = data.tracks.items[0].album.name;
+
+            console.log(`Wow! I love '${songName}' by ${artistName}. '${albumName}' is one of my favorite albums.`);
+            console.log(`Click here to listen! ${songURL}\n`);
+
+        })
 }
