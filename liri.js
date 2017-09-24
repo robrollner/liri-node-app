@@ -82,12 +82,12 @@ function songInfo(song) {
             if (err) {
                 return console.log(err);
             }
-            let artistName = data.tracks.items[0].album.artists[0].name;
-            let songName = data.tracks.items[0].name;
+            let artist = data.tracks.items[0].album.artists[0].name;
+            let track = data.tracks.items[0].name;
             let songURL = data.tracks.items[0].album.artists[0].external_urls.spotify;
-            let albumName = data.tracks.items[0].album.name;
+            let album = data.tracks.items[0].album.name;
 
-            console.log(`Wow! I love '${songName}' by ${artistName}. '${albumName}' is one of my favorite albums.`);
+            console.log(`Wow! I love '${track}' by ${artist}. '${album}' is one of my favorite albums.`);
             console.log(`Click here to listen! ${songURL}\n`);
 
         })
