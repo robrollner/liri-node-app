@@ -41,7 +41,7 @@ function nodeApp() {
                 movieInfo(movie);
             });
         } else if (results.program === "do-what-it-says") {
-            nodeApp();
+            // nodeApp();
             //do something but not sure what...
         }
     })
@@ -63,7 +63,7 @@ function tweeter() {
         }
         console.log('');
     })
-    setTimeout(reStart, 1500);
+    setTimeout(nodeApp, 2500);
 
 }
 
@@ -90,7 +90,7 @@ function songInfo(song) {
             console.log(`Click here to listen! ${songURL}\n`);
 
         })
-    setTimeout(reStart, 1500);
+    setTimeout(nodeApp, 2500);
 
 }
 
@@ -113,32 +113,32 @@ function movieInfo(movie) {
             let IMDB = JSON.parse(body).imdbRating;
             let rottenTomato = JSON.parse(body).Ratings[1];
 
-            console.log(title);
-            console.log(year);
-            console.log(origin);
-            console.log(language);
-            console.log(plot);
-            console.log(actors);
-            console.log(IMDB);
-            console.log(rottenTomato);
+            console.log("The movie is " + title);
+            console.log("Which was released in " + year);
+            console.log("The movie was made in " + origin);
+            console.log("The language of the film is " + language);
+            console.log("The movie is about " + plot);
+            console.log("It stars: " + actors);
+            console.log("IMDB Rated it " + IMDB + " out of 10 stars.");
+            console.log("On rotten tomato it received " + rottenTomato);
         }
     })
-    setTimeout(reStart, 1500);
+    setTimeout(nodeApp, 2500);
 
 }
 
-function reStart() {
-    inquirer.prompt([{
-        type: "checkbox",
-        name: "confirm",
-        message: "Do you want to try again?",
-        choices: ["Yes", "No"]
-    }]).then((results) => {
-        if (results.choices === "Yes") {
-            nodeApp();
-        } else {
-            console.log("\nYou are no fun!");
-        }
-    })
+// function reStart() {
+//     inquirer.prompt([{
+//         type: "checkbox",
+//         name: "confirm",
+//         message: "Do you want to try again?",
+//         choices: ["Yes", "No"]
+//     }]).then((results) => {
+//         if (results.choices === "Yes") {
+//             nodeApp();
+//         } else {
+//             console.log("\nYou are no fun!");
+//         }
+//     })
 
-}
+// }
