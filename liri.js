@@ -16,12 +16,14 @@ function nodeApp() {
             'my-tweets', //Tweet tweet!
             'spotify-this-song', //Don't look for the sign
             'movie-this', //I'm somebody
-            'do-what-it-says' // No you are!
+            'do-what-it-says', // No you are!
+            'end-program'
         ]
     }]).then((results) => {
-
+        //twitter
         if (results.program === "my-tweets") {
             tweeter();
+            //spotify
         } else if (results.program === "spotify-this-song") {
             inquirer.prompt([{
                 type: "input",
@@ -31,6 +33,7 @@ function nodeApp() {
                 let song = results.song;
                 songInfo(song);
             });
+            //omdb request
         } else if (results.program === "movie-this") {
             inquirer.prompt([{
                 type: "input",
@@ -40,11 +43,51 @@ function nodeApp() {
                 let movie = results.movie;
                 movieInfo(movie);
             });
+            //random file reader
         } else if (results.program === "do-what-it-says") {
-            // nodeApp();
-            //do something but not sure what...
+            // fs.appendFile("random.txt", ", ", +results, function(err) {
+            // if (err) {
+            // return console.log("Whoa buddy you had an error");
+            // }
+            // songInfo("random.txt");
+            console.log("I want it that way!");
+            doit();
+            // });
+            //end program
+        } else if (results.program === "end-program") {
+            inquirer.prompt([{
+                type: 'confirm',
+                name: "confirm",
+                message: "Are you sure you want to end your search?"
+            }]).then((results) => {
+                end();
+                console.log("\nGood Bye earthling!");
+
+            })
         }
     })
+}
+
+function end() {
+    // logIt();
+}
+
+function doit() {
+    setTimeout(750);
+    console.log("\nBackstreet's back AGAIN!!!!");
+    fs.readFile("random.txt", "utf8", function(error, data) {
+        if (error) {
+            return console.log(error);
+        }
+        console.log(data);
+        var dataArray = data.split(",");
+
+        if (dataArray[0] === "songInfo") {
+            songInfo(dataArray[1]);
+        }
+        // logIt();
+    });
+
 }
 
 function tweeter() {
@@ -62,6 +105,7 @@ function tweeter() {
             console.log(tweets.statuses[i].created_at.substring(0, 19) + tweets.statuses[i].text);
         }
         console.log('');
+        // logIt();
     })
     setTimeout(nodeApp, 2500);
 
@@ -88,6 +132,7 @@ function songInfo(song) {
 
             console.log(`Wow! I love '${track}' by ${artist}. '${album}' is one of my favorite albums.`);
             console.log(`Click here to listen! ${songURL}\n`);
+            // logIt();
 
         })
     setTimeout(nodeApp, 2500);
@@ -103,6 +148,8 @@ function movieInfo(movie) {
     request(movieUrl, (error, response, body) => {
         if (JSON.parse(body).response === "false") {
             console.log("\nNo movie for you!");
+            logIt(response.movie);
+
         } else if (!error && response.statusCode === 200) {
             let title = JSON.parse(body).Title;
             let year = JSON.parse(body).Year;
@@ -111,7 +158,7 @@ function movieInfo(movie) {
             let plot = JSON.parse(body).Plot;
             let actors = JSON.parse(body).Actors;
             let IMDB = JSON.parse(body).imdbRating;
-            let rottenTomato = JSON.parse(body).Ratings[1];
+            let rottenTomato = JSON.parse(body).Ratings[1].Value;
 
             console.log("The movie is " + title);
             console.log("Which was released in " + year);
@@ -127,18 +174,11 @@ function movieInfo(movie) {
 
 }
 
-// function reStart() {
-//     inquirer.prompt([{
-//         type: "checkbox",
-//         name: "confirm",
-//         message: "Do you want to try again?",
-//         choices: ["Yes", "No"]
-//     }]).then((results) => {
-//         if (results.choices === "Yes") {
-//             nodeApp();
-//         } else {
-//             console.log("\nYou are no fun!");
-//         }
-//     })
-
-// }
+function logIt(results) {
+    var now = new Date();
+    fs.appendFile('log.txt', now, ": ", results, function(err, data) {
+        if (err) {
+            return console.log(err);
+        }
+    });
+}
