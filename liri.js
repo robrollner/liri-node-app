@@ -45,12 +45,14 @@ function nodeApp() {
             });
             //random file reader
         } else if (results.program === "do-what-it-says") {
-            // fs.appendFile("random.txt", ", ", +results, function(err) {
-            // if (err) {
-            // return console.log("Whoa buddy you had an error");
-            // }
-            // songInfo("random.txt");
-            console.log("I want it that way!");
+            // fs.readFile("random.txt", "utf8", function(err, data) {
+            //     if (err) {
+            //         return console.log("Whoa buddy you had an error");
+            //     }
+            //     console.log("I want it that way!");
+            //     data = data.split(",");
+            //     songInfo(data);
+
             doit();
             // });
             //end program
@@ -80,10 +82,10 @@ function doit() {
             return console.log(error);
         }
         console.log(data);
-        var dataArray = data.split(",");
+        var data = data.split(",");
 
-        if (dataArray[0] === "songInfo") {
-            songInfo(dataArray[1]);
+        if (data === "songInfo") {
+            songInfo(data);
         }
         // logIt();
     });
