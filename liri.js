@@ -53,8 +53,9 @@ function nodeApp() {
             //     data = data.split(",");
             //     songInfo(data);
 
+            // doit();
+            console.log("are you working?");
             doit();
-            console.log("are you working?", data);
             // });
             //end program
         } else if (results.program === "end-program") {
@@ -72,11 +73,11 @@ function nodeApp() {
 }
 
 function end() {
-    // logIt();
+    logIt("User wanted to quit, quitter.");
 }
 
 function doit() {
-    setTimeout(750);
+    logIt("User wanted to do it.\n");
     console.log("\nBackstreet's back AGAIN!!!!");
     fs.readFile("random.txt", "utf8", function(error, data) {
         if (error) {
@@ -94,6 +95,7 @@ function doit() {
 }
 
 function tweeter() {
+    logIt("User looked at tweets.\n");
     let client = new twitter(keys.twitterKeys);
     let queryUrl = "https://api.twitter.com/1.1/search/tweets.json?q=satincoffins&result_type=recent&count=20";
 
@@ -117,6 +119,7 @@ function tweeter() {
 
 
 function songInfo(song) {
+    logIt("User selected song: " + song + "\n");
     let Spotify = new spotify(keys.spotifyKeys);
 
     Spotify.search({
@@ -146,12 +149,12 @@ function songInfo(song) {
 
 function movieInfo(movie) {
     // let apiKey = "40e9cece";
+    logIt("User selected film: " + movie + "\n");
     let movieUrl = "http://www.omdbapi.com/?t=" + movie + "&apiKey=40e9cece";
 
     request(movieUrl, (error, response, body) => {
         if (JSON.parse(body).response === "false") {
             console.log("\nNo movie for you!");
-            logIt("User selected film: " + movie);
 
         } else if (!error && response.statusCode === 200) {
             let title = JSON.parse(body).Title;
@@ -176,12 +179,12 @@ function movieInfo(movie) {
     setTimeout(nodeApp, 2500);
 
 }
-console.log(logIt());
+
 
 function logIt(userResults) {
     console.log(userResults);
     var now = new Date();
-    fs.appendFile('log.txt', now + ": " + userResults, function(err, data) {
+    fs.appendFile('log.txt', "\n" + now + ": " + userResults, function(err, data) {
         if (err) {
             return console.log(err);
         }

@@ -1,1 +1,12 @@
-Thu Sep 28 2017 17:57:53 GMT-0600 (Mountain Daylight Time): TestThu Sep 28 2017 17:58:23 GMT-0600 (Mountain Daylight Time): TestThu Sep 28 2017 17:59:42 GMT-0600 (Mountain Daylight Time): undefined
+
+Thu Sep 28 2017 18:19:32 GMT-0600 (Mountain Daylight Time): User selected film: jaws
+
+Thu Sep 28 2017 18:21:47 GMT-0600 (Mountain Daylight Time): User looked at tweets.
+
+Thu Sep 28 2017 18:21:56 GMT-0600 (Mountain Daylight Time): User selected song: sambrosa
+
+Thu Sep 28 2017 18:34:41 GMT-0600 (Mountain Daylight Time): User wanted to do it.
+
+Thu Sep 28 2017 18:35:39 GMT-0600 (Mountain Daylight Time): User wanted to do it.
+
+Thu Sep 28 2017 18:35:39 GMT-0600 (Mountain Daylight Time): User selected song: "I Want it That Way"
