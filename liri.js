@@ -54,6 +54,7 @@ function nodeApp() {
             //     songInfo(data);
 
             doit();
+            console.log("are you working?", data);
             // });
             //end program
         } else if (results.program === "end-program") {
@@ -82,10 +83,10 @@ function doit() {
             return console.log(error);
         }
         console.log(data);
-        var data = data.split(",");
+        var dataArray = data.split(",");
 
-        if (data === "songInfo") {
-            songInfo(data);
+        if (dataArray[0] === "songInfo") {
+            songInfo(dataArray[1]);
         }
         // logIt();
     });
@@ -150,7 +151,7 @@ function movieInfo(movie) {
     request(movieUrl, (error, response, body) => {
         if (JSON.parse(body).response === "false") {
             console.log("\nNo movie for you!");
-            logIt(response.movie);
+            logIt("User selected film: " + movie);
 
         } else if (!error && response.statusCode === 200) {
             let title = JSON.parse(body).Title;
@@ -175,10 +176,12 @@ function movieInfo(movie) {
     setTimeout(nodeApp, 2500);
 
 }
+console.log(logIt());
 
-function logIt(results) {
+function logIt(userResults) {
+    console.log(userResults);
     var now = new Date();
-    fs.appendFile('log.txt', now, ": ", results, function(err, data) {
+    fs.appendFile('log.txt', now + ": " + userResults, function(err, data) {
         if (err) {
             return console.log(err);
         }
