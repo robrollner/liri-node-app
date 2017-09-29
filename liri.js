@@ -41,23 +41,17 @@ function nodeApp() {
                 message: "Name a movie!",
             }]).then((results) => {
                 let movie = results.movie;
+                if (movie === "") {
+                    movie = "Mr Nobody";
+                }
                 movieInfo(movie);
             });
             //random file reader
         } else if (results.program === "do-what-it-says") {
-            // fs.readFile("random.txt", "utf8", function(err, data) {
-            //     if (err) {
-            //         return console.log("Whoa buddy you had an error");
-            //     }
-            //     console.log("I want it that way!");
-            //     data = data.split(",");
-            //     songInfo(data);
 
-            // doit();
             console.log("are you working?");
             doit();
-            // });
-            //end program
+
         } else if (results.program === "end-program") {
             inquirer.prompt([{
                 type: 'confirm',
@@ -89,7 +83,6 @@ function doit() {
         if (dataArray[0] === "songInfo") {
             songInfo(dataArray[1]);
         }
-        // logIt();
     });
 
 }
@@ -110,7 +103,6 @@ function tweeter() {
             console.log(tweets.statuses[i].created_at.substring(0, 19) + tweets.statuses[i].text);
         }
         console.log('');
-        // logIt();
     })
     setTimeout(nodeApp, 2500);
 
@@ -138,7 +130,6 @@ function songInfo(song) {
 
             console.log(`Wow! I love '${track}' by ${artist}. '${album}' is one of my favorite albums.`);
             console.log(`Click here to listen! ${songURL}\n`);
-            // logIt();
 
         })
     setTimeout(nodeApp, 2500);
@@ -154,6 +145,8 @@ function movieInfo(movie) {
 
     request(movieUrl, (error, response, body) => {
         if (JSON.parse(body).response === "false") {
+            logIt("User did not input a movie and now has to watch Mr.Nobody.\n");
+
             console.log("\nNo movie for you!");
 
         } else if (!error && response.statusCode === 200) {
